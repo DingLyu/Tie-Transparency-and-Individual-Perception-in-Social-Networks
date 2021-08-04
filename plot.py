@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: ding lyu
+@email: dylan_lyu@sjtu.edu.cn
 """
 # this file includes:
 # plot Fig.~1, Fig.~2, Fig.~3, Fig.~4, Fig.~S4, Fig.~S5, Fig.~S6 except the visualization of networks
