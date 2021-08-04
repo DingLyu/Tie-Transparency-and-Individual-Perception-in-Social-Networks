@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: ding lyu
+@email: dylan_lyu@sjtu.edu.cn
 """
 # this file includes:
 # compute tie transparency by knowable degree (KD)
