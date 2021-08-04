@@ -83,6 +83,40 @@ def IndividualPerception():
                     Misperception[data[2]].append((data[0], data[1]))
     return Perception, Misperception
 
+# compute perceptual proportion of 155 individuals
+def PerceptualProportion():
+    Perception, Misperception = IndividualPerception()
+    count = 0
+    for node in Perception:
+        if len(Perception[node]) != 0:
+            count += 1
+    print(count)
+    G = StandardGlobalNetwork()
+    X = {}
+
+    for node in G.nodes():
+        A = [0,0,0,0,0,0,0]
+        B = [0,0,0,0,0,0,0]
+        for edge in G.edges():
+            if node not in edge:
+                A[nx.shortest_path_length(G, node, edge[0])+nx.shortest_path_length(G, node, edge[1])-2] += 1
+        for p in Perception[node]:
+            if node not in p:
+                B[nx.shortest_path_length(G, node, p[0]) + nx.shortest_path_length(G, node, p[1]) - 2] += 1
+        x = []
+        for i in range(7):
+            if A[i] != 0:
+                x.append(B[i]/A[i])
+            else:
+                x.append(0)
+        X[node] = x
+    H = [[] for i in range(7)]
+    for i in range(7):
+        for node in G.nodes():
+            H[i].append(X[node][i])
+    H = np.array(H)
+    np.save('PerceptualProportion.npy', H)
+
 # quantify the individual perceived capability of all participants
 def Contribution(flag):
     G = StandardGlobalNetwork()
